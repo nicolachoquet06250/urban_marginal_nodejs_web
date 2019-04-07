@@ -8,10 +8,12 @@
     		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     		crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="/js/helpers.js"></script>
     <script src="/js/Globals.js"></script>
     <script src="/js/arenePage/create.js"></script>
     <script src="/js/mainPage/create.js"></script>
     <script src="/js/choixPersoPage/create.js"></script>
+    <script src="/js/init_socket_events.js"></script>
     <script>
         window.addEventListener('load', () => createMainPage());
     </script>

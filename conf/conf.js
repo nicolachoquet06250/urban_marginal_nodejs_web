@@ -7,22 +7,32 @@ module.exports = {
 		'/users': './routes/users',
 		sockets: {
 			connection_message: 'Vous êtes connecté !!',
-			connection_callback: io => {
-
-			},
+			connection_callback: io => {},
 			broadcast_connection_message: 'Un nouveau user s\'est connecté !!',
 			events: {
 				'message': {
 					controller: '../conf/socket_events',
 					action: 'message'
 				},
+				'client_exists': {
+					controller: '../conf/socket_events',
+					action: 'client_exists'
+				},
 				'add_client': {
 					controller: '../conf/socket_events',
 					action: 'add_client'
 				},
+				'map_exists': {
+					controller: '../conf/socket_events',
+					action: 'map_exists'
+				},
 				'init_map': {
 					controller: '../conf/socket_events',
 					action: 'init_map'
+				},
+				'new_player': {
+					controller: '../conf/socket_events',
+					action: 'new_player'
 				},
 				'disconnect': {
 					controller: '../conf/socket_events',

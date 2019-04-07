@@ -1,8 +1,6 @@
 'use strict';
 
 function createChoixPersoPage(socket) {
-
-	let max_perso = 3;
 	let current_perso = 1;
 
 	let div = document.createElement('div');
@@ -70,14 +68,14 @@ function createChoixPersoPage(socket) {
 	left_btn.addEventListener('click', () => {
 		current_perso--;
 		if(current_perso === 0) {
-			current_perso = max_perso;
+			current_perso = Globals.NBPERSOS;
 		}
 		perso_img.style.backgroundImage = `url('/images/personnages/perso${current_perso}marche1d0.gif')`;
 	});
 
 	right_btn.addEventListener('click', () => {
 		current_perso++;
-		if(current_perso === max_perso + 1) {
+		if(current_perso === Globals.NBPERSOS + 1) {
 			current_perso = 1;
 		}
 		perso_img.style.backgroundImage = `url('/images/personnages/perso${current_perso}marche1d0.gif')`;
@@ -88,13 +86,11 @@ function createChoixPersoPage(socket) {
 			socket.emit('client_exists', {
 				client: {
 					pseudo: pseudo.value,
-					avatar: perso_img.style.backgroundImage.replace('url("', '').replace('")', ''),
 					id: current_perso
 				}
 			});
 			drow_arena(socket, {
 				pseudo: pseudo.value,
-				avatar: perso_img.style.backgroundImage.replace('url("', '').replace('")', ''),
 				id: current_perso
 			});
 		}

@@ -31,21 +31,7 @@ function createMainPage() {
 	main.append(logs);
 
 	document.querySelector('#start').addEventListener('click', () => {
-		let socket = io($('#server_ip').val() + ':' + $('#server_port').val());
-		socket.emit('message', 'coucou');
-
-		socket.on('broadcast', message => {
-			console.log(message);
-		});
-
-		socket.on('message', message => {
-			if(message.exists) {
-				socket.emit('add_client', {
-					client: message.client
-				});
-			}
-		});
-
-		createChoixPersoPage(socket);
+		let socket = io(server_ip.value + ':' + server_port.value);
+		createChoixPersoPage(init_socket_events(socket));
 	});
 }

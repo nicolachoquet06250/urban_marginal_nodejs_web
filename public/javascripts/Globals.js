@@ -64,7 +64,20 @@ class Globals {
 	static get SEPARE() { // caractère de séparation (volontairement rare)
 		return "~";
 	}
+
 	static get PSEUDO() {
 		return 0;
+	}
+
+	static get NB_ROWS() {
+		return 9;
+	}
+
+	static get NB_MURS() {
+		return 5;
+	}
+
+	static get NB_COLS() {
+		return 12;
 	}
 }
