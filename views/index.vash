@@ -1,0 +1,19 @@
+@html.extend('layout', function(model) {
+  @html.block('content', function(model) {
+    <h1>@model.title</h1>
+    <p>Welcome to @model.title</p>
+    <main></main>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+    		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    		crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="/js/Globals.js"></script>
+    <script src="/js/arenePage/create.js"></script>
+    <script src="/js/mainPage/create.js"></script>
+    <script src="/js/choixPersoPage/create.js"></script>
+    <script>
+        window.addEventListener('load', () => createMainPage());
+    </script>
+  })
+})
