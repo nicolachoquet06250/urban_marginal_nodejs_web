@@ -13,7 +13,14 @@ let config = require('../conf/conf');
  * Get port from environment and store in Express.
  */
 
-let port = normalizePort(process.env.PORT || config.port);
+let using_port = config.port;
+if(process.argv[2] !== undefined) {
+	using_port = process.argv[2];
+} else if(process.env.PORT !== undefined) {
+	using_port = process.env.PORT;
+}
+
+let port = normalizePort( using_port );
 app.set('port', port);
 
 /**

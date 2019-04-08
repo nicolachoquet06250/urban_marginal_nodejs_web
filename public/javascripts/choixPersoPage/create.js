@@ -86,7 +86,8 @@ function createChoixPersoPage(socket) {
 			socket.emit('client_exists', {
 				client: {
 					pseudo: pseudo.value,
-					id: current_perso
+					id: current_perso,
+					marker: `P_${current_perso}_${current_direction}_${current_action}_${current_marche_step}_${pseudo.value}`
 				}
 			});
 			drow_arena(socket, {

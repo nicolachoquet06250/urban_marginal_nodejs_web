@@ -46,7 +46,20 @@ function helper_mort() {
 	current_action = MORT;
 }
 
+function helper_get_current_position() {
+	return JSON.parse(document.querySelector('main').getAttribute('myposition'));
+}
+
+function helper_set_current_position(object) {
+	document.querySelector('main').setAttribute('myposition', JSON.stringify(object));
+}
+
+function helper_get_map() {
+	return JSON.parse(document.querySelector('main').getAttribute('map'));
+}
+
 function mouvement_left(socket, map, perso, current_position, min_position) {
+	current_position = helper_get_current_position();
 	let i = current_position.i;
 	let j = current_position.j;
 
@@ -63,6 +76,7 @@ function mouvement_left(socket, map, perso, current_position, min_position) {
 }
 
 function mouvement_right(socket, map, perso, current_position, max_position) {
+	current_position = helper_get_current_position();
 	let i = current_position.i;
 	let j = current_position.j;
 
@@ -79,6 +93,7 @@ function mouvement_right(socket, map, perso, current_position, max_position) {
 }
 
 function mouvement_up(socket, map, perso, current_position, min_position) {
+	current_position = helper_get_current_position();
 	let i = current_position.i;
 	let j = current_position.j;
 
@@ -94,6 +109,7 @@ function mouvement_up(socket, map, perso, current_position, min_position) {
 }
 
 function mouvement_down(socket, map, perso, current_position, max_position) {
+	current_position = helper_get_current_position();
 	let i = current_position.i;
 	let j = current_position.j;
 
@@ -110,7 +126,7 @@ function mouvement_down(socket, map, perso, current_position, max_position) {
 
 function mouvement_perso(socket, map, current, next, cond, perso) {
 	let valid_mouvement = false;
-	if (cond && map[next.i][next.j] !== 'M') {
+	if (cond && map[next.i][next.j] === '.') {
 		map[current.i][current.j] = '.';
 		map[next.i][next.j] = perso.marker;
 		valid_mouvement = true;
@@ -118,7 +134,16 @@ function mouvement_perso(socket, map, current, next, cond, perso) {
 		map[current.i][current.j] = perso.marker;
 		valid_mouvement = false;
 	}
-	drow_map(map);
+	drow_map(socket, map, perso);
+
+	socket.emit('new_player', {
+		perso: perso,
+		position: position
+	});
+	socket.emit('perso_position_updated', {
+		perso: perso,
+		position: position
+	});
 	socket.emit('message', {
 		type: 'broadcast',
 		message: {

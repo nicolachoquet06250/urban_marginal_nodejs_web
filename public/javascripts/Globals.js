@@ -1,3 +1,14 @@
+let sounds = {
+	ambiance: new Audio('/sons/ambiance.wav'),
+	death: new Audio('/sons/death.wav'),
+	fight: new Audio('/sons/fight.wav'),
+	go: new Audio('/sons/go.wav'),
+	hurt: new Audio('/sons/hurt.wav'),
+	precedent: new Audio('/sons/precedent.wav'),
+	next: new Audio('/sons/suivant.wav'),
+	welcome: new Audio('/sons/welcome.wav')
+};
+
 class Globals {
 	static get SEPARATOR() {
 		return "//";
@@ -79,5 +90,41 @@ class Globals {
 
 	static get NB_COLS() {
 		return 12;
+	}
+
+	static get AMBIANCE() {
+		return 'ambiance';
+	}
+
+	static get DEATH() {
+		return 'death';
+	}
+
+	static get FIGHT() {
+		return 'fight';
+	}
+
+	static get GO() {
+		return 'go';
+	}
+
+	static get HURT() {
+		return 'hurt';
+	}
+
+	static get PRECEDENT() {
+		return 'precedent';
+	}
+
+	static get NEXT() {
+		return 'next';
+	}
+
+	static get WELCOME() {
+		return 'welcome';
+	}
+
+	static SOUND(key) {
+		return sounds[key];
 	}
 }

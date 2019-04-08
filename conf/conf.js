@@ -37,6 +37,14 @@ module.exports = {
 				'disconnect': {
 					controller: '../conf/socket_events',
 					action: 'disconnect'
+				},
+				'perso_position_updated': {
+					controller: '../conf/socket_events',
+					action: 'perso_position_updated'
+				},
+				'update_position': {
+					controller: '../conf/socket_events',
+					action: 'update_position'
 				}
 			}
 		}

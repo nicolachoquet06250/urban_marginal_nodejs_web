@@ -23,7 +23,7 @@ function create_arena(debug = false) {
 	return { arena, map_container};
 }
 
-function drow_map(map) {
+function drow_map(socket, map, perso = {}) {
 	let { arena, map_container } = create_arena();
 
 	for(let i in map) {
@@ -39,7 +39,7 @@ function drow_map(map) {
 					break;
 				default:
 					let perso_found = cel.match(/P_([0-9]+)_(d0|d1)_(marche|touche|mort)_([0-9]+)_([a-zA-Z0-9\_\-\@\~\#\$\!\*]+)/);
-					if(perso_found.length !== 0) {
+					if(perso_found !== null && perso_found.length !== 0) {
 						let perso_cel = create_cel(`/images/personnages/perso${perso_found[1]}${perso_found[3]}${perso_found[4]}${perso_found[2]}.gif`);
 						let perso_pseudo = perso_found[5];
 						perso_cel.setAttribute('title', perso_pseudo);
@@ -58,6 +58,9 @@ function drow_map(map) {
 						perso_cel.append(perso_pseudo_append);
 						map_container.append(perso_cel);
 					}
+					else {
+						map_container.append(create_cel());
+					}
 			}
 		}
 		map_container.append(document.createElement('br'));
@@ -71,6 +74,33 @@ function drow_map(map) {
 	main.innerHTML = '';
 
 	main.append(arena);
+
+	let position = helper_get_current_position();
+	let response = create_commands();
+
+	response.top_button.addEventListener('click', () => {
+		let response = mouvement_up(socket, map, perso, position, 0);
+		helper_set_current_position(response.position);
+		map = response.map;
+	});
+
+	response.left_button.addEventListener('click', () => {
+		let response = mouvement_left(socket, map, perso, position, 0);
+		helper_set_current_position(response.position);
+		map = response.map;
+	});
+
+	response.right_button.addEventListener('click', () => {
+		let response = mouvement_right(socket, map, perso, position, Globals.NB_COLS);
+		helper_set_current_position(response.position);
+		map = response.map;
+	});
+
+	response.bottom_button.addEventListener('click', () => {
+		let response = mouvement_down(socket, map, perso, position, Globals.NB_ROWS);
+		helper_set_current_position(response.position);
+		map = response.map;
+	});
 }
 
 function drow_arena(socket, perso) {

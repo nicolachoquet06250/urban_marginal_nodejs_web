@@ -7,11 +7,18 @@ function createMainPage() {
 	server_ip.setAttribute('placeholder', 'IP Server');
 	server_ip.value = '127.0.0.1';
 
+	let href = window.location.href;
+
+	let port = '80';
+	if(href.indexOf(':') !== -1) {
+		port = href.split(':')[2].replace('/', '');
+	}
+
 	let server_port = document.createElement('input');
 	server_port.setAttribute('type', 'number');
 	server_port.setAttribute('id', 'server_port');
 	server_port.setAttribute('placeholder', 'Port Server');
-	server_port.value = '3000';
+	server_port.value = port;
 
 	let start_btn = document.createElement('input');
 	start_btn.setAttribute('type', 'button');
